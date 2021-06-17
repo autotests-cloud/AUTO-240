@@ -4,6 +4,7 @@ import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
 
 import static cloud.autotests.helpers.DriverHelper.getConsoleLogs;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,15 +16,16 @@ public class AppTests extends TestBase {
     @DisplayName("Тест на поиск в mail.ru")
     void generatedTest() {
         step("Открыть https://mail.ru", () -> {
-            // todo just add selenium action
+            open("https://mail.ru");
         });
 
         step("Ввести \"mosqa.ru\" в поле поиска", () -> {
-            // todo just add selenium action
+            $("#q").val("mosqa.ru").pressEnter();
         });
 
         step("Проверить, что \"MosQA CTF\" появилось в результатах поиска", () -> {
-            // todo just add selenium action
+            $("#js-result").shouldHave(text("MosQA CTF"));
+
         });
     }
 
